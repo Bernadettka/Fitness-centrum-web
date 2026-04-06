@@ -8,29 +8,7 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
-
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="index.html">Iron Gym</a></h1>
-						<nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-											<li><a href="index.html">Domov</a></li>
-											<li><a href="generic.html">O nás</a></li>
-											<li><a href="elements.html">Trenréri</a></li>
-					
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
-					</header>
+			<?php include "header.php" ?>
 
 				<!-- Main -->
 					<article id="main">
@@ -81,39 +59,39 @@
 								<section>
 									<h4>Formulár rezervácia</h4>
 									<p>individuálny tréning v dĺžke 1 hodiny. Platba na mieste 30 eur v hotovosti</p>
-									<form method="post" action="#">
+									<form method="post" action="data.php">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Meno" />
+												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Meno" required/>
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-lastname" id="demo-lastname" value="" placeholder="Priezvisko" />
+												<input type="text" name="demo-lastname" id="demo-lastname" value="" placeholder="Priezvisko" required />
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+												<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" required/>
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-telcislo" id="demo-telcislo" value="" placeholder="Telefónne číslo" />
+												<input type="text" name="demo-telcislo" id="demo-telcislo" value="" placeholder="Telefónne číslo v tvare 0948444..." pattern="[0-9]{10}" required/>
 											</div>
 											<div class="col-12">
-												<select name="demo-category" id="demo-category">
+												<select name="demo-category" id="demo-category" required>
 													<option value="">- Tréneri -</option>
 													<option value="1">Manufacturing</option>
 													<option value="1">Shipping</option>
 													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
+													<option value="1">Human Resources</option> 
 												</select>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+												<input type="radio" id="demo-priority-low" name="demo-priority" value="začiatočník" checked>
 												<label for="demo-priority-low">začiatočník</label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-normal" name="demo-priority">
+												<input type="radio" id="demo-priority-normal" name="demo-priority" value="pokročilý">
 												<label for="demo-priority-normal">pokročilý</label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
+												<input type="radio" id="demo-priority-high" name="demo-priority" value="profesionál">
 												<label for="demo-priority-high">profesionál</label>
 											</div>
 											<!--
@@ -127,7 +105,7 @@
 											-->
 											</div>
 											<div class="col-12">
-												<textarea name="demo-message" id="demo-message" placeholder="Napíš sem niečo o sebe a o tvojich skúsenostiach s cvičením" rows="6"></textarea>
+												<textarea name="demo-message" id="demo-message" placeholder="Napíš sem niečo o sebe a o tvojich skúsenostiach s cvičením" rows="6" required></textarea>
 											</div>
 											<p>Po odoslaní formulára je rezervácia považovaná za záväznú!</p>
 											<div class="col-12">
@@ -150,19 +128,7 @@
 							</div>
 						</section>
 					</article>
-					<!-- Footer -->
-					<footer id="footer">
-						<ul class="icons">
-							<li><a href="https://x.com/?lang=sk" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="https://www.facebook.com/?locale=sk_SK" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="https://www.instagram.com/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="https://dribbble.com/" target="_blank" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						</ul>
-						<ul class="copyright">
-							<li><a href="#" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li><li>kontakt: irongym@gmail.com</li> <br>
-							<li>2026 &copy; Iron Gym - All rights reserved</li>
-						</ul>
-					</footer>
+				<?php include "footer.php" ?>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
