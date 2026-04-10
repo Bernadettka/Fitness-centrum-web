@@ -1,3 +1,11 @@
+<?php 
+	if(isset($_GET["trener"])){
+		$vybrany_trener = $_GET["trener"];
+	}
+	else{
+		$vybrany_trener = "";
+	}
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -59,64 +67,65 @@
 								<section>
 									<h4>Formulár rezervácia</h4>
 									<p>individuálny tréning v dĺžke 1 hodiny. Platba na mieste 30 eur v hotovosti</p>
-									<form method="post" action="data.php">
+									<div id = "formular">
+										<form action ="spracovanie rezervacie.php" method="post">
+									</div>
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Meno" required/>
+												<input type="text" name="meno" id="meno" placeholder="Meno" required/>
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-lastname" id="demo-lastname" value="" placeholder="Priezvisko" required />
+												<input type="text" name="priezvisko" id="priezvisko" placeholder="Priezvisko" required />
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" required/>
+												<input type="email" name="email" id="email" placeholder="Email" required/>
 											</div>
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-telcislo" id="demo-telcislo" value="" placeholder="Telefónne číslo v tvare 0948444..." pattern="[0-9]{10}" required/>
+												<input type="text" name="tel" id="tel"  placeholder="Telefónne číslo v tvare 0948444..." pattern="[0-9]{10}" required/>
 											</div>
 											<div class="col-12">
-												<select name="demo-category" id="demo-category" required>
-													<option value="">- Tréneri -</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option> 
+												<label for="trener">Vyber si trénera</label>
+												<select name="trener" id="trener" required>
+													<option value="meno1"> <?= $vybrany_trener == "meno1" ? "selected" : "" ?> Manufacturing</option>
+													<option value="meno2">Shipping</option>
+													<option value="meno3">Administration</option>
+													<option value="meno4">Human Resources</option> 
 												</select>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-low" name="demo-priority" value="začiatočník" checked>
+												<input type="radio" id="stupen" name="stupen" value="začiatočník" checked>
 												<label for="demo-priority-low">začiatočník</label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-normal" name="demo-priority" value="pokročilý">
+												<input type="radio" id="stupen" name="stupen" value="pokročilý">
 												<label for="demo-priority-normal">pokročilý</label>
 											</div>
 											<div class="col-4 col-12-small">
-												<input type="radio" id="demo-priority-high" name="demo-priority" value="profesionál">
+												<input type="radio" id="stupen" name="stupen" value="profesionál">
 												<label for="demo-priority-high">profesionál</label>
 											</div>
-											<!--
-											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="col-6 col-12-small">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											-->
-											</div>
+											
+											
 											<div class="col-12">
-												<textarea name="demo-message" id="demo-message" placeholder="Napíš sem niečo o sebe a o tvojich skúsenostiach s cvičením" rows="6" required></textarea>
+												<textarea name="sprava" id="sprava" placeholder="Napíš sem niečo o sebe a o tvojich skúsenostiach s cvičením" rows="6"></textarea>
 											</div>
 											<p>Po odoslaní formulára je rezervácia považovaná za záväznú!</p>
 											<div class="col-12">
 												<ul class="actions">
-													<li><input type="submit" value="Rezervovať" class="primary" /></li>
+													<li><input type="submit" value="Rezervovať" class="primary"/></li>
 													<li><input type="reset" value="Vymazať" /></li>
+
 												</ul>
 											</div>
 										</div>
 									</form>
 								</section>
+								<section class="vysledok-ziadosti"></section>
+								<?php if(isset($_GET ["status"])&& $_GET["status"]=="success"): ?>
+								<div style="background: #c1121f; color: black; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; font-weight: bold;">
+        							Žiadosť bola úspešne odoslaná!
+    							</div>
+    							<?php endif; ?>
 								<section class="wrapper style5">
 									<div class="inner">
 										<h5>Naši Tréneri</h5>

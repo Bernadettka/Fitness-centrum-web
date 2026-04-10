@@ -8,29 +8,8 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="landing is-preload">
-
-		<!-- Page Wrapper -->
 			<div id="page-wrapper">
-
-				<!-- Header -->
-					<header id="header" class="alt">
-						<h1><a href="index.html">Iron Gym</a></h1>
-						<nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-											<li><a href="index.html">Domov</a></li>
-											<li><a href="generic.html">O nás</a></li>
-											<li><a href="elements.html">Trenréri</a></li>
-					
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
-					</header>
+				<?php include "header.php" ?>
 
 				<!-- Banner -->
 					<section id="banner">
@@ -156,24 +135,8 @@
 							</div>
 					</section>
 				</div>
-
-
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="icons">
-							<li><a href="https://x.com/?lang=sk" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="https://www.facebook.com/?locale=sk_SK" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="https://www.instagram.com/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="https://dribbble.com/" target="_blank" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						</ul>
-						<ul class="copyright">
-							<li><a href="#" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li><li>kontakt: irongym@gmail.com</li> <br>
-							<li>2026 &copy; Iron Gym - All rights reserved</li>
-						</ul>
-					</footer>
-
-			</div>
-
+			<?php include "footer.php" ?>
+			
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
