@@ -1,5 +1,5 @@
 <?php
-require_once "db.php";
+require_once "../databaza/db.php";
 
 $databaza = new databaza();
 $pdo = $databaza->pripojit_k_databaze();
@@ -44,8 +44,10 @@ $rezervacie = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <div class="container my-5">
-        <h1> Spracovanie klienov</h1>
-        <a class="btn btn-primary" href="create.php" role="button">nový klient</a>
+        <h1>Admin</h1>
+        <a class="btn btn-primary" href="index.php" role="button">späť na Iron Gym</a>
+        <h2> Spracovanie klienov</h2>
+        <a class="btn btn-primary" href="create_klient.php" role="button">nový klient</a>
         <table class="table">
             <thead>
                 <tr>
@@ -71,12 +73,15 @@ $rezervacie = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlspecialchars($rezervacia["trener"]) ?></td>
                         <td><?= htmlspecialchars($rezervacia["stupen"]) ?></td>
                         <td>
-                            <a class="btn btn-primary btn-sm" href="edit.php?id=<?= $rezervacia['id'] ?>">Upraviť</a>
-                            <a class="btn btn-danger btn-sm" href="delete.php?id=<?= $rezervacia['id'] ?>">Vymazať</a>
-                        </td>
+                            <a class="btn btn-primary btn-sm" href="update_klient.php?id=<?= $rezervacia['id'] ?>">Upraviť</a>
+                            <a class="btn btn-danger btn-sm" href="delete_klient.php?id=<?= $rezervacia['id'] ?>">Vymazať</a>
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <h2>Vytváranie trénerov</h2>
+        <a class="btn btn-primary" href="create.php" role="button">pridať nového trénera</a>
+
 
 </html>
