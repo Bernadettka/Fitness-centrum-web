@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($admin && password_verify($heslo, $admin["heslo"])) {
 
+            session_regenerate_id(true);
+
             $_SESSION["admin_id"] = $admin["id"];
             $_SESSION["admin_meno"] = $admin["meno"];
 
@@ -67,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <?php if ($error): ?>
                         <div class="alert alert-danger">
-                            <?= $error ?>
+                            <?= htmlspecialchars($error) ?>
                         </div>
                     <?php endif; ?>
 
@@ -104,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </button>
 
                     </form>
+                    <a class="button-container" href="../webstranka/index.php" role="button">späť na Iron Gym</a>
 
                 </div>
 

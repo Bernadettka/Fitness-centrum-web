@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: admin_login.php");
+    exit;
+}
 require_once "../databaza/db.php";
 
 $databaza = new databaza();
@@ -51,6 +57,7 @@ $treneri = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="container my-5">
         <h1>Admin</h1>
         <a class="btn btn-primary" href="../webstranka/index.php" role="button">späť na Iron Gym</a>
+        <button onclick="window.location.href='logout.php'">Odhlásiť sa</button>
         <h2> Spracovanie klienov</h2>
         <a class="btn btn-primary" href="../crud_klient/create_klient.php" role="button">nový klient</a>
         <table class="table">
@@ -107,7 +114,6 @@ $treneri = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td>
                             <a class="btn btn-primary btn-sm" href="../crud_trener/update_trener.php?id=<?= $trener['id'] ?>">Upraviť</a>
                             <a class="btn btn-danger btn-sm" href="../crud_trener/delete_trener.php?id=<?= $trener['id'] ?>">Vymazať</a>
-
                     </tr>
                 <?php endforeach; ?>
 
