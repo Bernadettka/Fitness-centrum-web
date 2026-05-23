@@ -5,27 +5,19 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: admin_login.php");
     exit;
 }
+
 require_once "../databaza/db.php";
+require_once "../crud_trener/trener.php";
+require_once "../crud_klient/klient.php";
 
 $databaza = new databaza();
 $pdo = $databaza->pripojit_k_databaze();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$trenerClass = new Trener($pdo);
+$klientClass = new Klient($pdo);
 
-    $meno = $_POST["meno"];
-    $email = $_POST["email"];
-    $tel = $_POST["tel"];
-
-    if (!empty($meno) && !empty($email)) {
-
-        $sql = "INSERT INTO rezervacie (meno, email, tel) VALUES (?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$meno, $email, $tel]);
-
-        header("Location: admin.php");
-        exit;
-    }
-}
+$rezervacie = $klientClass->getAll();
+$treneri = $trenerClass->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,29 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Iron Gym</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-</head>
 
-<?php
-require_once "../databaza/db.php";
-
-$databaza = new databaza();
-$pdo = $databaza->pripojit_k_databaze();
-
-$sql = "SELECT * FROM rezervacie ORDER BY id DESC";
-$stmt = $pdo->query($sql);
-$rezervacie = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$sql = "SELECT * FROM treneri ORDER BY id DESC";
-$stmt = $pdo->query($sql);
-$treneri = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
-
+</html>
 
 <body>
     <div class="container my-5">
         <h1>Admin</h1>
         <a class="btn btn-primary" href="../webstranka/index.php" role="button">späť na Iron Gym</a>
-        <button onclick="window.location.href='logout.php'">Odhlásiť sa</button>
+        <button onclick="window.location.href='admin_logout.php'">Odhlásiť sa</button>
         <h2> Spracovanie klienov</h2>
         <a class="btn btn-primary" href="../crud_klient/create_klient.php" role="button">nový klient</a>
         <table class="table">
@@ -117,4 +94,4 @@ $treneri = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 <?php endforeach; ?>
 
-</html>
+                </html>
