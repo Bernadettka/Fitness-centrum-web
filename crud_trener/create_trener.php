@@ -1,8 +1,11 @@
 <?php
 require_once "../databaza/db.php";
+require_once "../crud_trener/trener.php";
 
 $db = new databaza();
 $pdo = $db->pripojit_k_databaze();
+$trenerClass = new Trener($pdo);
+
 
 $chyba = "";
 
@@ -14,12 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($meno) || empty($opis) || empty($obrazok)) {
         $chyba = "Vyplň všetky povinné polia.";
     } else {
-        $sql = "INSERT INTO treneri 
-                (meno, opis, obrazok) 
-                VALUES (?, ?, ?)";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$meno, $opis, $obrazok]);
+        $trenerClass->create($meno, $opis, $obrazok);
 
         header("Location: ../admin/admin.php");
         exit;

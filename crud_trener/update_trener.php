@@ -1,8 +1,11 @@
 <?php
 require_once "../databaza/db.php";
+require_once "../crud_trener/trener.php";
 
 $db = new databaza();
 $pdo = $db->pripojit_k_databaze();
+$trenerClass = new Trener($pdo);
+
 
 if (!isset($_GET["id"])) {
     header("Location: ../admin/admin.php");
@@ -10,10 +13,7 @@ if (!isset($_GET["id"])) {
 }
 
 $id = $_GET["id"];
-
-$stmt = $pdo->prepare("SELECT * FROM treneri WHERE id = ?");
-$stmt->execute([$id]);
-$trener = $stmt->fetch(PDO::FETCH_ASSOC);
+$trener = $trenerClass->getById($id);
 
 if (!$trener) {
     header("Location: ../admin/admin.php");
