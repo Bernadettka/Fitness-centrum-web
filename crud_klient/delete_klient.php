@@ -1,15 +1,14 @@
 <?php
 require_once "../databaza/db.php";
+require_once "klient.php";
 
 $db = new databaza();
 $pdo = $db->pripojit_k_databaze();
+$klientClass = new Klient($pdo);
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-
-    $sql = "DELETE FROM rezervacie WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$id]);
+    $klientClass->delete($id);
 }
 
 header("Location: ../admin/admin.php");

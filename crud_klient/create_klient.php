@@ -1,8 +1,10 @@
 <?php
 require_once "../databaza/db.php";
+require_once "klient.php";
 
 $db = new databaza();
 $pdo = $db->pripojit_k_databaze();
+$klientClass = new Klient($pdo);
 
 $chyba = "";
 
@@ -18,13 +20,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($meno) || empty($priezvisko) || empty($email) || empty($tel)) {
         $chyba = "Vyplň všetky povinné polia.";
     } else {
-        $sql = "INSERT INTO rezervacie 
-                (meno, priezvisko, email, tel, trener, sprava, stupen) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$meno, $priezvisko, $email, $tel, $trener, $sprava, $stupen]);
-
+        $klientClass->create(
+            $meno,
+            $priezvisko,
+            $email,
+            $tel,
+            $trener,
+            $sprava,
+            $stupen
+        );
         header("Location: ../admin/admin.php");
         exit;
     }

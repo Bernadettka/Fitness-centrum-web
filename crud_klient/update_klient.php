@@ -1,8 +1,10 @@
 <?php
 require_once "../databaza/db.php";
+require_once "klient.php";
 
 $db = new databaza();
 $pdo = $db->pripojit_k_databaze();
+$klientClass = new Klient($pdo);
 
 if (!isset($_GET["id"])) {
     header("Location: ../admin/admin.php");
@@ -10,10 +12,7 @@ if (!isset($_GET["id"])) {
 }
 
 $id = $_GET["id"];
-
-$stmt = $pdo->prepare("SELECT * FROM rezervacie WHERE id = ?");
-$stmt->execute([$id]);
-$rezervacia = $stmt->fetch(PDO::FETCH_ASSOC);
+$rezervacia = $klientClass->getById($id);
 
 if (!$rezervacia) {
     header("Location: ../admin/admin.php");
@@ -21,21 +20,16 @@ if (!$rezervacia) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sql = "UPDATE rezervacie 
-            SET meno = ?, priezvisko = ?, email = ?, tel = ?, trener = ?, sprava = ?, stupen = ?
-            WHERE id = ?";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
+    $klientClass->update(
+        $id,
         $_POST["meno"],
         $_POST["priezvisko"],
         $_POST["email"],
         $_POST["tel"],
         $_POST["trener"],
         $_POST["sprava"],
-        $_POST["stupen"],
-        $id
-    ]);
+        $_POST["stupen"]
+    );
 
     header("Location: ../admin/admin.php");
     exit;
