@@ -10,7 +10,7 @@ require_once "../databaza/db.php";
 require_once "../crud_trener/trener.php";
 require_once "../crud_klient/klient.php";
 
-$databaza = new databaza();
+$databaza = new Database();
 $pdo = $databaza->pripojit_k_databaze();
 
 $trenerClass = new Trener($pdo);
@@ -18,6 +18,8 @@ $klientClass = new Klient($pdo);
 
 $rezervacie = $klientClass->getAll();
 $treneri = $trenerClass->getAll();
+$pocetRezervacii = $klientClass->getPocetRezervacii();
+$pocetTrenerov = $trenerClass->getPocetTrenerov();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +36,31 @@ $treneri = $trenerClass->getAll();
     <div class="container my-5">
         <h1>Admin</h1>
         <a class="btn btn-primary" href="../webstranka/index.php" role="button">späť na Iron Gym</a>
-        <button onclick="window.location.href='admin_logout.php'">Odhlásiť sa</button>
+        <button class="btn btn-primary" onclick="window.location.href='admin_logout.php'">Odhlásiť sa</button>
+        <div class="container mt-4">
+            <div class="row g-3 mb-4">
+
+                <div class="col-auto">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center px-4">
+                            <h6 class="text-muted">Počet rezervácií</h6>
+                            <h3 class="mb-0"><?= $pocetRezervacii['pocet']; ?></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center px-4">
+                            <h6 class="text-muted">Počet trénerov</h6>
+                            <h3 class="mb-0"><?= $pocetTrenerov['pocet']; ?></h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
         <h2> Spracovanie klienov</h2>
         <a class="btn btn-primary" href="../crud_klient/create_klient.php" role="button">nový klient</a>
         <table class="table">
@@ -62,7 +88,8 @@ $treneri = $trenerClass->getAll();
                         <td><?= htmlspecialchars($rezervacia["stupen"]) ?></td>
                         <td>
                             <a class="btn btn-primary btn-sm" href="../crud_klient/update_klient.php?id=<?= $rezervacia['id'] ?>">Upraviť</a>
-                            <a class="btn btn-danger btn-sm" href="../crud_klient/delete_klient.php?id=<?= $rezervacia['id'] ?>">Vymazať</a>
+                            <a class="btn btn-danger btn-sm" href="../crud_klient/delete_klient.php?id=<?= $rezervacia['id'] ?>"
+                                onclick="return confirm('Naozaj chcete odstrániť rezerváciu?')">Vymazať</a>
 
                     </tr>
                 <?php endforeach; ?>
@@ -90,8 +117,10 @@ $treneri = $trenerClass->getAll();
                         <td><?= htmlspecialchars($trener["obrazok"]) ?></td>
                         <td>
                             <a class="btn btn-primary btn-sm" href="../crud_trener/update_trener.php?id=<?= $trener['id'] ?>">Upraviť</a>
-                            <a class="btn btn-danger btn-sm" href="../crud_trener/delete_trener.php?id=<?= $trener['id'] ?>">Vymazať</a>
+                            <a class="btn btn-danger btn-sm" href="../crud_trener/delete_trener.php?id=<?= $trener['id'] ?>"
+                                onclick="return confirm('Naozaj chcete odstrániť rezerváciu?')">Vymazať</a>
                     </tr>
                 <?php endforeach; ?>
+</body>
 
-                </html>
+</html>

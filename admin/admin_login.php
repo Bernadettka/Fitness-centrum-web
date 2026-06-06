@@ -4,7 +4,7 @@ session_start();
 
 require_once "../databaza/db.php";
 
-$databaza = new databaza();
+$databaza = new Database();
 $pdo = $databaza->pripojit_k_databaze();
 
 $error = "";
