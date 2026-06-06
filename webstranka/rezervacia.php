@@ -1,16 +1,13 @@
 <?php
 
 require_once "../databaza/db.php";
+require_once "../crud_trener/trener.php";
 
-$databaza = new Databaza();
+$databaza = new Database();
 $pdo = $databaza->pripojit_k_databaze();
 
-$sql = "SELECT * FROM treneri";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-
-$treneri = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+$trenerClass = new Trener($pdo);
+$treneri = $trenerClass->getAll();
 $vybranyTrener = $_GET["trener"] ?? "";
 ?>
 
@@ -105,23 +102,7 @@ $vybranyTrener = $_GET["trener"] ?? "";
 							Žiadosť bola úspešne odoslaná!
 						</div>
 					<?php endif; ?>
-					<?php if (isset($_GET["status"]) && $_GET["status"] == "error"): ?>
 
-						<div style="
-							background: #ffb3b3;
-							color: black;
-							padding: 15px;
-							border-radius: 10px;
-							margin-bottom: 20px;
-							text-align: center;
-							font-weight: bold;
-						">
-
-							<?= $_GET["message"] ?>
-
-						</div>
-
-					<?php endif; ?>
 					<section class="wrapper style5">
 						<div class="inner">
 							<h2>Naši Tréneri</h2>
@@ -156,16 +137,7 @@ $vybranyTrener = $_GET["trener"] ?? "";
 		</section>
 	</article>
 	<?php include "footer.php" ?>
-
-	<!-- Scripts -->
-	<script src="../assets/js/jquery.min.js"></script>
-	<script src="../assets/js/jquery.scrollex.min.js"></script>
-	<script src="../assets/js/jquery.scrolly.min.js"></script>
-	<script src="../assets/js/browser.min.js"></script>
-	<script src="../assets/js/breakpoints.min.js"></script>
-	<script src="../assets/js/util.js"></script>
-	<script src="../assets/js/main.js"></script>
-
+	<?php include "scripts.php" ?>
 </body>
 
 </html>

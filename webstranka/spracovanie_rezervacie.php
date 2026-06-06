@@ -57,10 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
 }
 
-$databaza = new databaza();
+$databaza = new Database();
 $db = $databaza->pripojit_k_databaze();
 
-$booking = new booking($db);
+$booking = new Booking($db);
 
 $result = $booking->zapisat_data($_POST);
 

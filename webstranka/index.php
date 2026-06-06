@@ -15,7 +15,6 @@
 	<div id="page-wrapper">
 		<?php include "header.php" ?>
 
-		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
 				<h2>Iron Gym</h2>
@@ -29,7 +28,6 @@
 			<a href="#one" class="more scrolly">dozvi sa viac</a>
 		</section>
 
-		<!-- One -->
 		<section id="one" class="wrapper style1 special">
 			<div class="inner">
 				<header class="major">
@@ -46,10 +44,9 @@
 			</div>
 		</section>
 
-		<!-- Two -->
 		<section id="two" class="wrapper alt style2">
 			<section class="spotlight">
-				<div class="image"><img src="images/trener1.jpg" alt="" /></div>
+				<div class="image"><img src="../images/trener1.jpg" alt="" /></div>
 				<div class="content">
 					<h2>Naši kvalifikovaní tréneri</h2>
 					<p>Naši tréneri sú certifikovaní odborníci s dlhoročnými skúsenosťami v oblasti fitness. Každý z nich sa zameriava na individuálny prístup, správnu techniku a bezpečný tréning, aby si dosiahol čo najlepšie výsledky.</p>
@@ -121,12 +118,11 @@
 					<p>Môžeš si rezervovať tréning s našimi klasifikovanými trénermi priamo na našom webe</p>
 				</header>
 				<ul class="actions stacked">
-					<li><a href="generic.html" class="button fit">O nás</a></li>
-					<li><a href="elements.html" class="button fit primary">Rezervovať</a></li>
+					<li><a href="onas.php" class="button fit">O nás</a></li>
+					<li><a href="rezervacia.php" class="button fit primary">Rezervovať</a></li>
 				</ul>
 			</div>
 		</section>
-		<!-- images -->
 		<section class="wrapper style5">
 			<div class="inner">
 				<div class="box alt">
@@ -143,15 +139,7 @@
 		</section>
 	</div>
 	<?php include "footer.php" ?>
-
-	<!-- Scripts -->
-	<script src="../assets/js/jquery.min.js"></script>
-	<script src="../assets/js/jquery.scrollex.min.js"></script>
-	<script src="../assets/js/jquery.scrolly.min.js"></script>
-	<script src="../assets/js/browser.min.js"></script>
-	<script src="../assets/js/breakpoints.min.js"></script>
-	<script src="../assets/js/util.js"></script>
-	<script src="../assets/js/main.js"></script>
+	<?php include "scripts.php" ?>
 
 </body>
 
