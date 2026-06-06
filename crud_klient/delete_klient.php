@@ -1,4 +1,5 @@
 <?php
+require_once "../admin/auth.php";
 require_once "../databaza/db.php";
 require_once "klient.php";
 
