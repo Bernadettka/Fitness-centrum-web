@@ -1,6 +1,6 @@
 <?php
 
-class databaza
+class Database
 {
     private $host = "localhost";
     private $databaza = "webstranka";
