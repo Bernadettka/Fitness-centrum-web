@@ -1,11 +1,14 @@
 <?php
 require_once "../databaza/db.php";
-require_once "klient.php";
+require_once "../webstranka/booking.php";
+require_once "../crud_trener/trener.php";
 
-$db = new databaza();
+$db = new database();
 $pdo = $db->pripojit_k_databaze();
-$klientClass = new Klient($pdo);
-
+$booking = new Booking($pdo);
+$trenerClass = new Trener($pdo);
+$treneri = $trenerClass->getAll();
+$vybranyTrener = $_GET["trener"] ?? "";
 $chyba = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,15 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($meno) || empty($priezvisko) || empty($email) || empty($tel)) {
         $chyba = "Vyplň všetky povinné polia.";
     } else {
-        $klientClass->create(
-            $meno,
-            $priezvisko,
-            $email,
-            $tel,
-            $trener,
-            $sprava,
-            $stupen
-        );
+        $booking->zapisat_data([
+            "meno" => $meno,
+            "priezvisko" => $priezvisko,
+            "email" => $email,
+            "tel" => $tel,
+            "trener" => $trener,
+            "sprava" => $sprava,
+            "stupen" => $stupen
+        ]);
         header("Location: ../admin/admin.php");
         exit;
     }
@@ -75,11 +78,14 @@ $fields = [
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Tréner</label>
                 <div class="col-sm-6">
-                    <select class="form-control" name="trener">
-                        <option value="meno1">Marek Kováč</option>
-                        <option value="meno2">Tomáš Urban</option>
-                        <option value="meno3">Petra Bohová</option>
-                        <option value="meno4">Lukáš Bielik</option>
+                    <select class="form-control" name="trener" id="trener" required>
+                        <?php foreach ($treneri as $trener): ?>
+
+                            <option value="<?= $trener['id'] ?>">
+                                <?= htmlspecialchars($trener['meno']) ?>
+                            </option>
+
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>

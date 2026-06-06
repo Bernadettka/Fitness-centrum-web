@@ -2,7 +2,7 @@
 require_once "../databaza/db.php";
 require_once "klient.php";
 
-$db = new databaza();
+$db = new Database();
 $pdo = $db->pripojit_k_databaze();
 $klientClass = new Klient($pdo);
 

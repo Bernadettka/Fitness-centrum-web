@@ -25,33 +25,6 @@ class Klient
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create(
-        $meno,
-        $priezvisko,
-        $email,
-        $tel,
-        $trener,
-        $stupen,
-        $sprava
-    ) {
-
-        $sql = "INSERT INTO rezervacie
-                (meno, priezvisko,email,tel,trener,stupen,sprava)
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $this->db->prepare($sql);
-
-        return $stmt->execute([
-            $meno,
-            $priezvisko,
-            $email,
-            $tel,
-            $trener,
-            $stupen,
-            $sprava
-        ]);
-    }
-
     public function update(
         $id,
         $meno,
@@ -92,5 +65,13 @@ class Klient
         $sql = "DELETE FROM rezervacie WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$id]);
+    }
+
+    public function getPocetRezervacii()
+    {
+        $sql = "SELECT COUNT(*) as pocet FROM rezervacie";
+        $stmt = $this->db->query($sql);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
