@@ -35,7 +35,6 @@ $pocetTrenerov = $trenerClass->getPocetTrenerov();
 <body>
     <div class="container my-5">
         <h1>Admin</h1>
-        <a class="btn btn-primary" href="../webstranka/index.php" role="button">späť na Iron Gym</a>
         <button class="btn btn-primary" onclick="window.location.href='admin_logout.php'">Odhlásiť sa</button>
         <div class="container mt-4">
             <div class="row g-3 mb-4">
