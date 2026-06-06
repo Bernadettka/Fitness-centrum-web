@@ -42,6 +42,21 @@ class Trener
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$id]);
     }
+    public function update($id, $meno, $opis, $obrazok)
+    {
+        $sql = "UPDATE treneri
+            SET meno = ?, opis = ?, obrazok = ?
+            WHERE id = ?";
+
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute([
+            $meno,
+            $opis,
+            $obrazok,
+            $id
+        ]);
+    }
     public function getPocetTrenerov()
     {
         $sql = "SELECT COUNT(*) as pocet FROM treneri";

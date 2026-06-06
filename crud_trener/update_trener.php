@@ -22,21 +22,18 @@ if (!$trener) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sql = "UPDATE treneri 
-            SET meno = ?, opis = ?, obrazok = ?
-            WHERE id = ?";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
+    $trenerClass->update(
+        $id,
         $_POST["meno"],
         $_POST["opis"],
-        $_POST["obrazok"],
-        $id
-    ]);
+        $_POST["obrazok"]
+    );
 
     header("Location: ../admin/admin.php");
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
