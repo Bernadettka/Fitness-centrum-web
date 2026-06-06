@@ -2,7 +2,7 @@
 require_once "../databaza/db.php";
 require_once "../crud_trener/trener.php";
 
-$db = new databaza();
+$db = new Database();
 $pdo = $db->pripojit_k_databaze();
 $trenerClass = new Trener($pdo);
 

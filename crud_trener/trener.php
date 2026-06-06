@@ -42,4 +42,11 @@ class Trener
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$id]);
     }
+    public function getPocetTrenerov()
+    {
+        $sql = "SELECT COUNT(*) as pocet FROM treneri";
+        $stmt = $this->db->query($sql);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
